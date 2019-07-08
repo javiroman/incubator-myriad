@@ -17,7 +17,7 @@
  * under the License.
  */
 
-var React = require('react');
+import React from 'react';
 
 var ReactBootstrap = require('react-bootstrap')
   , Nav = ReactBootstrap.Nav
@@ -31,10 +31,8 @@ var ReactRouterBootstrap = require('react-router-bootstrap')
   , ButtonLink = ReactRouterBootstrap.ButtonLink;
 
 
-var NavbarComponent = React.createClass({
-  name: "NavbarComponent",
-
-  render: function () {
+class NavbarComponent extends React.Component {
+  render() {
     return(
     <Navbar fixedTop inverse>
       <Nav>
@@ -67,7 +65,6 @@ var NavbarComponent = React.createClass({
 
     </Navbar>
    )}
+};
 
-});
-
-module.exports = NavbarComponent;
+export default NavbarComponent;

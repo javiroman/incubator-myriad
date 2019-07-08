@@ -17,32 +17,36 @@
  * under the License.
  */
 
-var React = require("react");
-var Myriad = require('./components/Myriad')
-var FlexComponent = require('./components/FlexComponent')
-var TasksComponent = require('./components/TasksComponent')
-var ConfigComponent = require('./components/ConfigComponent')
-var AboutComponent = require('./components/AboutComponent')
-var HelpComponent = require('./components/HelpComponent')
-var ShutdownFrameworkComponent = require('./components/ShutdownFrameworkComponent')
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var Router = require('react-router')
-  , RouteHandler= Router.RouteHandler
-  , Route = Router.Route
-  , Redirect = Router.Redirect;
+import Myriad from './components/Myriad';
+//import FlexComponent from './components/FlexComponent';
+//import TasksComponent from './components/TasksComponent';
+//import ConfigComponent from './components/ConfigComponent';
+//import AboutComponent from './components/AboutComponent';
+//import HelpComponent from './components/HelpComponent';
+//import ShutdownFrameworkComponent from './components/ShutdownFrameworkComponent';
 
-var routes = (
-  <Route name="myriad" path="/" handler={Myriad} >
-    <Route name="frameworkDown" path="frameworkDown" handler={ShutdownFrameworkComponent} />
-    <Route name="flex" path="flex" handler={FlexComponent} />
-    <Route name="tasks" path="tasks" handler={TasksComponent} />
-    <Route name="help" path="help" handler={HelpComponent} />
-    <Route name="config" path="config" handler={ConfigComponent} />
-    <Route name="about" path="/" handler={AboutComponent} />
-    <Redirect from="myriad" to="about" />
-  </Route>
-);
+//var Router = require('react-router')
+//  , RouteHandler= Router.RouteHandler
+//  , Route = Router.Route
+//  , Redirect = Router.Redirect;
+//
+//var routes = (
+//  <Route name="myriad" path="/" handler={Myriad} >
+//    <Route name="frameworkDown" path="frameworkDown" handler={ShutdownFrameworkComponent} />
+//    <Route name="flex" path="flex" handler={FlexComponent} />
+//    <Route name="tasks" path="tasks" handler={TasksComponent} />
+//    <Route name="help" path="help" handler={HelpComponent} />
+//    <Route name="config" path="config" handler={ConfigComponent} />
+//    <Route name="about" path="/" handler={AboutComponent} />
+//    <Redirect from="myriad" to="about" />
+//  </Route>
+//);
 
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById("myriad"));
-});
+//Router.run(routes, function (Handler) {
+//  ReactDOM.render(<Handler/>, document.getElementById("myriad"));
+//});
+
+ReactDOM.render(<Myriad />, document.getElementById("myriad"));

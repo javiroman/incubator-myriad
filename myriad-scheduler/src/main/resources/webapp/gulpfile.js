@@ -52,7 +52,7 @@ gulp.task('js', gulp.series('clean', function(done) {
     done();
 }));
 
-gulp.task('js-dev', gulp.series('clean', function() {
+gulp.task('js-dev', function(done) {
     browserify({
         entries: ['./js/app.js'], // Only need initial file, browserify finds the deps
         transform: ['babelify'],
@@ -63,27 +63,28 @@ gulp.task('js-dev', gulp.series('clean', function() {
         .pipe(source('bundle.js'))
         .pipe(rename('myriad.js'))
         .pipe(gulp.dest("public/js/"));
-}));
+    done();
+});
 
 
-gulp.task('html', gulp.series('clean', function() {
+gulp.task('html', function() {
     return gulp.src('*.html')
         .pipe( gulp.dest('public/'))
-}));
+});
 
-gulp.task('css', gulp.series('clean', function() {
+gulp.task('css', function() {
     return gulp.src('css/*.css')
         .pipe( gulp.dest('public/css/'))
-}));
+});
 
-gulp.task('img', gulp.series('clean', function() {
+gulp.task('img', function() {
     return gulp.src('img/**')
         .pipe( gulp.dest('public/img/'))
-}));
+});
 
 gulp.task('build-dev', gulp.series('js-dev', 'html', 'css', 'img'));
 
-gulp.task('webserver', gulp.series('build-dev', function() {
+gulp.task('webserver', gulp.series('build-dev', function(done) {
     gulp.src('./public')
         .pipe(webserver({
             livereload: true,
@@ -91,17 +92,21 @@ gulp.task('webserver', gulp.series('build-dev', function() {
             open: true,
             port: 8888
         }));
+    done();
 }));
 
-gulp.task('watch', gulp.series('build-dev', function() {
-    gulp.watch('index.html', ['html']);
-    gulp.watch('css/**', ['css']);
-    gulp.watch('js/**', ['js-dev']);
-    gulp.watch('img/**', ['img']);
+gulp.task('watch', gulp.series('build-dev', function(done) {
+    gulp.watch('index.html', gulp.series('html'));
+    gulp.watch('css/**', gulp.series('css'));
+    gulp.watch('js/**', gulp.series('js-dev'));
+    gulp.watch('img/**', gulp.series('img'));
+    done();
 }));
 
-gulp.task('dev', gulp.series('watch', 'webserver'));
+gulp.task('dev', gulp.parallel('watch', 'webserver'));
 
-gulp.task('default', gulp.series('js', 'html', 'css', 'img'));
+gulp.task('default', 
+    gulp.series('clean', gulp.parallel('js', 'html', 'css', 'img'),
+        function(done) {done();}));
 
 gulp.task('build', gulp.series('default'));

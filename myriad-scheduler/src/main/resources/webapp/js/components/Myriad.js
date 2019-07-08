@@ -17,8 +17,8 @@
  * under the License.
  */
 
-var React = require('react');
-var NavbarComponent = require('../components/NavbarComponent');
+import React from 'react';
+import NavbarComponent from '../components/NavbarComponent';
 
 var Router = require('react-router')
   , RouteHandler = Router.RouteHandler;
@@ -28,13 +28,11 @@ var request = require('superagent');
 var parseString = require('xml2js').parseString;
 
 
+class Myriad extends React.Component {
+  constructor(props, context) {
+      super(props, context);
 
-
-var Myriad = React.createClass({
-  displayName: "Myriad",
-
-  getInitialState: function () {
-      return { config: {"profiles":{"small":{"cpu":"1","mem":"1"},
+      this.state ={ config: {"profiles":{"small":{"cpu":"1","mem":"1"},
                                     "medium":{"cpu":"2","mem":"2"},
                                     "large":{"cpu":"3","mem":"3"}},
                         "mesosMaster":"127.0.0.1:5050",
@@ -48,9 +46,9 @@ var Myriad = React.createClass({
                pollInterval: 2000
                }; // Update from store or event.
 
-  },
+  }
 
-  fetchState: function () {
+  fetchState() {
     request.get('/api/state')
       .end(function(err, res){
            if (!err) {
@@ -62,9 +60,9 @@ var Myriad = React.createClass({
              setTimeout(this.fetchState, this.state.pollInterval);
            }
          }.bind(this));
-  },
+  }
 
-  fetchConfig: function () {
+  fetchConfig() {
     request.get('/api/config')
       .end(function(err, res){
            if (!err) {
@@ -76,10 +74,9 @@ var Myriad = React.createClass({
             setTimeout(this.fetchConfig, this.state.pollInterval);
            }
          }.bind(this));
-  },
+  }
 
-
-  fetchApi: function () {
+  fetchApi() {
     request.get('/api/application.wadl')
       .end(function(err, res){
            if (!err) {
@@ -95,21 +92,20 @@ var Myriad = React.createClass({
              console.log('Oh no! error on GET api/application.wadl ' + res.text);
            }
          }.bind(this));
-  },
+  }
 
-  componentWillMount: function () {
+  componentWillMount() {
     this.fetchApi();
-  },
+  }
 
-  componentDidMount: function () {
+  componentDidMount() {
     // start polling
     this.setState({isPolling: true});
     this.fetchConfig();
     this.fetchState();
-  },
+  }
 
-  render: function () {
-
+  render() {
     return (
     <div>
       <NavbarComponent master={this.state.config.mesosMaster}/>
@@ -119,6 +115,6 @@ var Myriad = React.createClass({
      </div>
     );
   }
-});
+};
 
-module.exports = Myriad;
+export default Myriad;
