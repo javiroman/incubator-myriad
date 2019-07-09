@@ -17,18 +17,21 @@
  * under the License.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import NavbarComponent from '../components/NavbarComponent';
 
 var Router = require('react-router')
   , RouteHandler = Router.RouteHandler;
 
+/*
 var request = require('superagent');
 
 var parseString = require('xml2js').parseString;
 
+ */
 
-class Myriad extends React.Component {
+
+class Myriad extends Component {
   constructor(props, context) {
       super(props, context);
 
@@ -48,6 +51,7 @@ class Myriad extends React.Component {
 
   }
 
+    /*
   fetchState() {
     request.get('/api/state')
       .end(function(err, res){
@@ -105,16 +109,22 @@ class Myriad extends React.Component {
     this.fetchState();
   }
 
-  render() {
-    return (
-    <div>
-      <NavbarComponent master={this.state.config.mesosMaster}/>
-      <div className="container">
-        <RouteHandler config={this.state.config} tasks={this.state.tasks} wadl={this.state.wadl} />
-      </div>
-     </div>
-    );
-  }
-};
 
+     */
+  render() {
+    // JSX here: only one root component with nested components
+    return (
+      <div>
+        <NavbarComponent master={this.state.config.mesosMaster}/>
+            <div className="container">
+
+            </div>
+      </div>
+    );
+
+  }
+}
+ /*
+                <RouteHandler config={this.state.config} tasks={this.state.tasks} wadl={this.state.wadl} />
+                 */
 export default Myriad;

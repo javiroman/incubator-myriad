@@ -19,6 +19,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import Myriad from './components/Myriad';
 //import FlexComponent from './components/FlexComponent';
@@ -26,27 +28,35 @@ import Myriad from './components/Myriad';
 //import ConfigComponent from './components/ConfigComponent';
 //import AboutComponent from './components/AboutComponent';
 //import HelpComponent from './components/HelpComponent';
-//import ShutdownFrameworkComponent from './components/ShutdownFrameworkComponent';
+import ShutdownFrameworkComponent from './components/ShutdownFrameworkComponent';
+
+const history = createBrowserHistory();
 
 //var Router = require('react-router')
 //  , RouteHandler= Router.RouteHandler
 //  , Route = Router.Route
 //  , Redirect = Router.Redirect;
 //
+var routes = (
+    <Switch>
+        <Route path="/" component={Myriad} />
+        <Route path="frameworkDown" component={ShutdownFrameworkComponent} />
+    </Switch>
+);
+
 //var routes = (
-//  <Route name="myriad" path="/" handler={Myriad} >
-//    <Route name="frameworkDown" path="frameworkDown" handler={ShutdownFrameworkComponent} />
-//    <Route name="flex" path="flex" handler={FlexComponent} />
-//    <Route name="tasks" path="tasks" handler={TasksComponent} />
-//    <Route name="help" path="help" handler={HelpComponent} />
-//    <Route name="config" path="config" handler={ConfigComponent} />
-//    <Route name="about" path="/" handler={AboutComponent} />
-//    <Redirect from="myriad" to="about" />
-//  </Route>
+//  <Router history={history}>
+//        <Route name="myriad" path="/" handler={Myriad} />
+//        <Route name="frameworkDown" path="frameworkDown" handler={ShutdownFrameworkComponent} />
+//        <Route name="flex" path="flex" handler={FlexComponent} />
+//        <Route name="tasks" path="tasks" handler={TasksComponent} />
+//        <Route name="help" path="help" handler={HelpComponent} />
+//        <Route name="config" path="config" handler={ConfigComponent} />
+//        <Route name="about" path="/" handler={AboutComponent} />
+//        <Redirect from="myriad" to="about" />
+//  </Router>
 //);
 
-//Router.run(routes, function (Handler) {
-//  ReactDOM.render(<Handler/>, document.getElementById("myriad"));
-//});
 
-ReactDOM.render(<Myriad />, document.getElementById("myriad"));
+ReactDOM.render(<Router history={history}>{routes}</Router>,
+    document.getElementById("myriad"));

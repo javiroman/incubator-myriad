@@ -17,7 +17,7 @@
  * under the License.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 
 var ReactBootstrap = require('react-bootstrap')
   , Nav = ReactBootstrap.Nav
@@ -31,40 +31,41 @@ var ReactRouterBootstrap = require('react-router-bootstrap')
   , ButtonLink = ReactRouterBootstrap.ButtonLink;
 
 
-class NavbarComponent extends React.Component {
+class NavbarComponent extends Component {
   render() {
     return(
-    <Navbar fixedTop inverse>
-      <Nav>
-      <a className="navbar-brand" href="#">
-          <img src="/img/navbar_logo.png"></img>
-      </a>
-      </Nav>
-      <Nav bsStyle='tabs'   >
-      		<DropdownButton  title='Myriad' naveItem={true} >
-      			<NavItemLink  to="frameworkDown">Shutdown Framework</NavItemLink>
- 	   		</DropdownButton>
- 	  </Nav>
-      <Nav>
-        <NavItemLink to="flex">Flex</NavItemLink>
-        <NavItemLink to="tasks">Tasks</NavItemLink>
-      </Nav>
-      <Nav bsStyle='tabs'   >
-      	<DropdownButton  title='Help' naveItem={true} >
-      		<NavItemLink  to="help">Menu Options</NavItemLink>
-      		<NavItemLink  to="about">About Myriad</NavItemLink>
-      	</DropdownButton>
-      </Nav>
+        <Navbar fixedTop inverse>
+          <Nav>
+          <a className="navbar-brand" href="#">
+              <img src="/img/navbar_logo.png"></img>
+          </a>
+          </Nav>
+          <Nav bsStyle='tabs'   >
+                <DropdownButton  title='Myriad' naveItem={true} >
+                    <NavItemLink  to="frameworkDown">Shutdown Framework</NavItemLink>
+                </DropdownButton>
+          </Nav>
+          <Nav>
+            <NavItemLink to="flex">Flex</NavItemLink>
+            <NavItemLink to="tasks">Tasks</NavItemLink>
+          </Nav>
+          <Nav bsStyle='tabs'   >
+            <DropdownButton  title='Help' naveItem={true} >
+                <NavItemLink  to="help">Menu Options</NavItemLink>
+                <NavItemLink  to="about">About Myriad</NavItemLink>
+            </DropdownButton>
+          </Nav>
 
-      <Nav right>
-        <NavItemLink to="config">Config</NavItemLink>
-        <span className="navbar-text">
-          <Label bsStyle="default">{this.props.master}</Label>
-        </span>
-      </Nav>
+          <Nav right>
+            <NavItemLink to="config">Config</NavItemLink>
+            <span className="navbar-text">
+              <Label bsStyle="default">{this.props.master}</Label>
+            </span>
+          </Nav>
 
-    </Navbar>
-   )}
-};
+        </Navbar>
+   );
+  }
+}
 
 export default NavbarComponent;
